@@ -1,7 +1,2 @@
 # learn
-learn
-test skuddy
-
-hallo
-
-weiter änderung
+Ka was wir machen
