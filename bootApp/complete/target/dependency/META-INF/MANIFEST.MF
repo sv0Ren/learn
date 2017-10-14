@@ -1,0 +1,16 @@
+Manifest-Version: 1.0
+Implementation-Title: bootApp
+Implementation-Version: 0.1.0
+Archiver-Version: Plexus Archiver
+Built-By: wagner
+Implementation-Vendor-Id: org.springframework
+Spring-Boot-Version: 1.5.7.RELEASE
+Implementation-Vendor: Pivotal Software, Inc.
+Main-Class: org.springframework.boot.loader.JarLauncher
+Start-Class: hello.Application
+Spring-Boot-Classes: BOOT-INF/classes/
+Spring-Boot-Lib: BOOT-INF/lib/
+Created-By: Apache Maven 3.3.9
+Build-Jdk: 1.8.0_102
+Implementation-URL: http://projects.spring.io/spring-boot/bootApp/
+

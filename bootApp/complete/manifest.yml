@@ -6,3 +6,6 @@ applications:
   host: rest-service
   domain: guides.spring.io
   path: build/libs/bootApp-0.1.0.jar
+
+
+
