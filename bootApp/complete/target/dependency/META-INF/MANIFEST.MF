@@ -7,7 +7,7 @@ Implementation-Vendor-Id: org.springframework
 Spring-Boot-Version: 1.5.7.RELEASE
 Implementation-Vendor: Pivotal Software, Inc.
 Main-Class: org.springframework.boot.loader.JarLauncher
-Start-Class: hello.Application
+Start-Class: com.Main
 Spring-Boot-Classes: BOOT-INF/classes/
 Spring-Boot-Lib: BOOT-INF/lib/
 Created-By: Apache Maven 3.3.9

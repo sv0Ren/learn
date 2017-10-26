@@ -1,4 +1,5 @@
-FROM java:8
+FROM openjdk:8-jdk-alpine
+#java:8
 #openjdk:8-jdk-alpine
 EXPOSE 8080 8000
 RUN mkdir /java
