@@ -1,0 +1,8 @@
+mongodb:
+    image: mongo
+    container_name: mongodb
+    ports:
+        - 27017
+    hostname: mongodb
+    volumes:
+        - $HOME/data/db:/data/db

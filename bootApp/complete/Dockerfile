@@ -4,7 +4,7 @@ FROM openjdk:8-jdk-alpine
 EXPOSE 8080 8000
 RUN mkdir /java
 COPY target/bootApp-0.1.0.jar /java/app.jar
-ENTRYPOINT [ "java", "-Djava.security.egd=file:/dev/./urandom","-agentlib:jdwp=transport=dt_socket,address=8000,suspend=n,server=y","-jar","/java/app.jar" ]
+ENTRYPOINT [ "java","-Dspring.data.mongodb.uri=mongodb://mongo/test","-Djava.security.egd=file:/dev/./urandom","-agentlib:jdwp=transport=dt_socket,address=8000,suspend=n,server=y","-jar","/java/app.jar"]
 
 #VOLUME /tmp
 #ADD target/bootApp-0.1.0.jar app.jar

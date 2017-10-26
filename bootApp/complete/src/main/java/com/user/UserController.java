@@ -4,9 +4,11 @@ package com.user;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 
 @RestController
-@RequestMapping("/api")
+@RequestMapping("/user")
 public class UserController{
 
 
@@ -18,19 +20,18 @@ public class UserController{
 
     private User testUser = new User("deine","mudda");
 
-
-
-    @PostMapping("/user")
-    //@RequestMapping(method = RequestMethod.POST, value = "/")
+    @PostMapping()
     public User create(@RequestBody User user) {
         return userRepo.save(testUser);
     }
 
-    /*
+    @GetMapping(value="/{userId}")
+    public User get(@PathVariable String userId){
+        return userRepo.findOne(userId);
+    }
 
-
-    @RequestMapping(method = RequestMethod.GET, value = "/{user}")
-    public User get(@PathVariable String user) {
-        return userRepo.findOne(user);
-    }*/
+    @GetMapping(value="")
+    public List<User> getAll(){
+        return userRepo.findAll();
+    }
 }
