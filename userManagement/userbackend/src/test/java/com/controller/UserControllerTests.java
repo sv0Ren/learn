@@ -93,7 +93,7 @@ public class UserControllerTests {
 
     @Test
     public void testDelete() throws Exception {
-        //TODO:
+        //TODO: delete test
     }
 
     @Test
