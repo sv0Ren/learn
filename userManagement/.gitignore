@@ -9,7 +9,7 @@
 *.ear
 
 #Gradle temporary files
-target/
+**/target/
 
 #Eclipse files
 **/.project
@@ -20,7 +20,7 @@ blog/bin/
 
 #IntelliJ files
 **/*.iml
-**/.idea
+.idea
 **/.gradle
 
 
