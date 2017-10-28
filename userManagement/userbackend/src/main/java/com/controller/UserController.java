@@ -23,7 +23,12 @@ public class UserController{
 
     @DeleteMapping()
     public void delete(@RequestBody User user) {
-        userService.delete(user.id);
+        userService.delete(user);
+    }
+
+    @DeleteMapping(value="/{userId}")
+    public void delete(@PathVariable String userId){
+        userService.delete(userId);
     }
 
     @PutMapping

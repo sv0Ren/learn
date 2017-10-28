@@ -18,6 +18,7 @@ package com.controller;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.model.User;
 import com.services.UserService;
+import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -31,9 +32,10 @@ import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 import org.springframework.web.context.WebApplicationContext;
 
+import javax.validation.constraints.AssertTrue;
+
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 import static org.springframework.test.web.servlet.setup.MockMvcBuilders.standaloneSetup;
@@ -92,18 +94,43 @@ public class UserControllerTests {
     }
 
     @Test
+    public void testDeleteByID() throws Exception {
+        userService.save(user);
+
+        this.mockMvc.perform(delete("/user/"+ID))
+                .andExpect(status().isOk());
+
+    }
+
+    @Test
     public void testDelete() throws Exception {
-        //TODO: delete test
+        userService.save(user);
+
+        this.mockMvc.perform(delete("/user")
+                .contentType(MediaType.APPLICATION_JSON)
+                .content(objectMapper.writeValueAsString(user)))
+                .andExpect(status().isOk());
+
     }
 
     @Test
     public void testUpdate() throws Exception {
-        //TODO:
+        userService.save(user);
+
+        user.firstName = "lala";
+
+        this.mockMvc.perform(put("/user")
+                .contentType(MediaType.APPLICATION_JSON)
+                .content(objectMapper.writeValueAsString(user)))
+                .andExpect(status().isOk());
+
+        User updatedUser = userService.findByFirstName("lala");
+        Assert.assertEquals(updatedUser.firstName,"lala");
     }
 
-    //@Test
+    @Test
     public void testDelteAllUsers() throws Exception {
-        userService.deleteAll();
+        //serService.deleteAll();
     }
 
 }
