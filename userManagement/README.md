@@ -65,5 +65,4 @@ Start Build and run:
 
 
 # Git
-
-
+>ssh-add ~/.ssh/key
