@@ -21,7 +21,7 @@ blog/bin/
 #IntelliJ files
 **/*.iml
 *.iml
-.idea
+/.idea
 **/.gradle
 
 
