@@ -1,0 +1,7 @@
+{
+  "name": "user_signup",
+  "version": "0.1.0",
+  "dependencies": {
+    "processenv": "^0.1.1"
+  }
+}
