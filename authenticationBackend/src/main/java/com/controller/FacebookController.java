@@ -1,5 +1,5 @@
 package com.controller;
-
+/*
 import org.springframework.social.connect.ConnectionRepository;
 import org.springframework.social.facebook.api.Facebook;
 import org.springframework.social.facebook.api.PagedList;
@@ -35,4 +35,4 @@ public class FacebookController {
         return "hello";
     }
 
-}
+}*/

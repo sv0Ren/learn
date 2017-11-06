@@ -1,0 +1,45 @@
+security:
+  oauth2:
+    client:
+      client-id: acme
+      client-secret: acmesecret
+      scope: read,write
+      auto-approve-scopes: '.*'
+
+facebook:
+  client:
+    clientId: 295328394316805
+    clientSecret: e1d067b6973adc0df9d9ab90bf7daf90
+    scope: email
+    accessTokenUri: https://graph.facebook.com/oauth/access_token
+    userAuthorizationUri: https://www.facebook.com/dialog/oauth
+    tokenName: oauth_token
+    authenticationScheme: query
+    clientAuthenticationScheme: form
+  resource:
+    userInfoUri: https://graph.facebook.com/me?fields=email,name
+
+github:
+  client:
+    clientId: 757ff721e66dc33e66a4
+    clientSecret: 6b3e27c14f4589452fcf926c012efea280d13d22
+    accessTokenUri: https://github.com/login/oauth/access_token
+    userAuthorizationUri: https://github.com/login/oauth/authorize
+    clientAuthenticationScheme: form
+  resource:
+    userInfoUri: https://api.github.com/user
+
+instagram:
+  client:
+    clientId: dd3b5fcfc6604bd282bdf07cb837144e
+    clientSecret: c0bb3020bd3e49e9a4d806220edef3ba
+    accessTokenUri: https://api.instagram.com/oauth/access_token
+    userAuthorizationUri: https://api.instagram.com/oauth/authorize
+    clientAuthenticationScheme: form
+  resource:
+    userInfoUri: https://api.instagram.com/v1/users/self
+
+logging:
+  level:
+    org.springframework.security: DEBUG
+
