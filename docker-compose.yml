@@ -1,0 +1,41 @@
+version: '2'
+services:
+
+  db:
+     image: mongo
+     container_name: user_db
+     volumes:
+          - /data/db:/data/db
+     ports:
+          - "27017:27017"
+
+  web:
+    build:
+      context: .
+      dockerfile: userBackend/Dockerfile
+    container_name: user_backend
+    image: user_backend_img
+    ports:
+          - "8081:8081"
+          - "8001:8001"
+    links:
+      - db
+
+  auth:
+    build:
+      context: .
+      dockerfile: authenticationBackend/Dockerfile
+    container_name: auth_backend
+    image: auth_backend_img
+    ports:
+          - "8080:8080"
+          - "8000:8000"
+  test:
+    build:
+      context: .
+      dockerfile: testBackend/Dockerfile
+    container_name: test_backend
+    image: test_backend_img
+    ports:
+          - "9999:9999"
+

@@ -16,4 +16,5 @@ public class AuthController {
     public Principal user(Principal principal) {
         return principal;
     }
+
 }

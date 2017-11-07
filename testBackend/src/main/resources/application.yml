@@ -1,0 +1,17 @@
+server:
+  port: 9999
+  context-path: /client
+security:
+  oauth2:
+    client:
+      client-id: acme
+      client-secret: acmesecret
+      access-token-uri: http://192.168.99.100:8080/oauth/token
+      user-authorization-uri: http://192.168.99.100:8080/oauth/authorize
+    resource:
+      user-info-uri: http://192.168.99.100:8080/me
+
+logging:
+  level:
+    org.springframework.security: DEBUG
+

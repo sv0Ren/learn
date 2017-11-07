@@ -35,6 +35,10 @@
             <button ng-click="home.logout()" class="btn btn-primary">Logout</button>
         </div>
     </div>
+
+    <div class="container text-danger" ng-show="home.error">
+        There was an error (bad credentials).
+    </div>
 </body>
 
 </html>
@@ -58,6 +62,10 @@
                 console.log("Logout failed")
                 self.authenticated = false;
             });
+            if ($location.absUrl().indexOf("error=true") >= 0) {
+                self.authenticated = false;
+                self.error = true;
+            }
         };
     });
 </script>
