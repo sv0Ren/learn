@@ -65,4 +65,11 @@ Start Build and run:
 
 
 # Git
->ssh-add ~/.ssh/key
+> ssh-add ~/.ssh/key
+
+# Rechte
+Alle:
+> chmod -R 777 <name> 
+
+SSH Key
+> chmod 600 <name>
