@@ -125,7 +125,7 @@ public class UserControllerTests {
 
     @Test
     public void testDelteAllUsers() throws Exception {
-        userService.deleteAll();
+        //userService.deleteAll();
     }
 
 }

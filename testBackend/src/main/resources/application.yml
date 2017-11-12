@@ -6,10 +6,10 @@ security:
     client:
       client-id: acme
       client-secret: acmesecret
-      access-token-uri: http://192.168.99.100:8080/oauth/token
-      user-authorization-uri: http://192.168.99.100:8080/oauth/authorize
+      access-token-uri: http://localhost:8080/oauth/token
+      user-authorization-uri: http://localhost:8080/oauth/authorize
     resource:
-      user-info-uri: http://192.168.99.100:8080/me
+      user-info-uri: http://localhost:8080/me
 
 logging:
   level:

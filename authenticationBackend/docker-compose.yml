@@ -1,0 +1,13 @@
+version: '2'
+services:
+  auth:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: auth_backend
+    image: auth_backend_img
+    ports:
+          - "8080:8080"
+          - "8000:8000"
+
+

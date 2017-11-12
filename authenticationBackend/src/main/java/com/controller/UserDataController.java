@@ -16,7 +16,7 @@ public class UserDataController {
     @GetMapping()
     public Map<String, String> user(Principal principal) {
         Map<String, String> map = new LinkedHashMap<>();
-        map.put("name", principal.getName());
+        map.put("name", "hallo " +principal.getName());
         return map;
     }
 }

@@ -64,11 +64,13 @@
             <version>1.0.1</version>
         </dependency>
 
+        <!--Internals-->
         <dependency>
-            <groupId>org.projectlombok</groupId>
-            <artifactId>lombok</artifactId>
-            <optional>true</optional>
+            <groupId>com</groupId>
+            <artifactId>commons</artifactId>
+            <version>${project.version}</version>
         </dependency>
+
 
     </dependencies>
 
