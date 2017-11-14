@@ -1,26 +1,30 @@
-package com.controller.utils;
+package com.beans;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.PropertySource;
 import org.springframework.core.env.Environment;
+import org.springframework.stereotype.Component;
 
-@Configuration
+@Component
 @PropertySource("classpath:application.properties")
-public class PropertyManager {
+public class PropertyBeans {
 
     @Autowired
     private Environment env;
 
-    public String getHostUrl() {
+    @Bean
+    public String hostUrl() {
         return env.getProperty("host.url");
     }
 
-    public String getUserBackendPort() {
+    @Bean
+    public String userBackendPort() {
         return env.getProperty("userbackend.port");
     }
 
-    public String getUserBackendUrl() {
-        return getHostUrl() +":" +getUserBackendPort() + "/";
+    @Bean
+    public String userBackend() {
+        return hostUrl() +":" + userBackendPort() + "/";
     }
 }

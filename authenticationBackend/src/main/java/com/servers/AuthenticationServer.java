@@ -1,6 +1,6 @@
-package com.server;
+package com.servers;
 
-import com.bean.util.ClientResources;
+import com.beans.utils.ClientResources;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.boot.autoconfigure.security.SecurityProperties;

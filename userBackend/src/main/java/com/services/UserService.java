@@ -1,16 +1,98 @@
 package com.services;
 
+
+import com.models.MongoUser;
+import com.repos.UserRepo;
+import constants.Constants;
+import interfaces.UserInterface;
+import models.User;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.ArrayList;
 import java.util.List;
 
-import com.model.User;
-import org.springframework.data.mongodb.repository.MongoRepository;
 
-public interface UserService extends MongoRepository<User, String> {
+@RestController
+@RequestMapping("/user")
+public class UserService implements UserInterface {
 
-    public User findByMail(String mail);
+    @Autowired
+    private UserRepo userService;
 
-    public User findByFirstName(String firstName);
+    @Override
+    @PostMapping()
+    public void create(@RequestBody User user) {
+        MongoUser mongoUser = new MongoUser(user);
+        userService.save(mongoUser);
+    }
 
-    public List<User> findByLastName(String lastName);
+    @Override
+    @DeleteMapping()
+    public void delete(@RequestBody User user) {
+        MongoUser mongoUser = new MongoUser(user);
+        userService.delete(mongoUser);
+    }
 
+    @Override
+    @DeleteMapping(value="/{userId}")
+    public void delete(@PathVariable String userId){
+        userService.delete(userId);
+    }
+
+    @Override
+    @PutMapping
+    public void update(@RequestBody User newUser){
+        MongoUser oldUser = userService.findOne(newUser.id);
+        if(oldUser != null){
+            newUser.id = oldUser.id;
+            MongoUser mongoUser = new MongoUser(newUser);
+            userService.save(mongoUser);
+        }
+    }
+
+    @Override
+    @GetMapping(value="/{typ}")
+    public User get(@PathVariable String typ, @RequestBody String identifier){
+
+        if(typ.equals(Constants.MAIL)){
+            return userService.findByMail(identifier);
+        }
+        if(typ.equals(Constants.ID)){
+            return userService.findOne(identifier);
+        }
+
+        return null;
+    }
+
+    @Override
+    @GetMapping(value="/id/{userId}")
+    public User get(@PathVariable String userId){
+        return userService.findOne(userId);
+    }
+
+    @Override
+    @GetMapping(value={"/{typ}/{identifier}/"})
+    public User getByIdentifier(@PathVariable String typ, @PathVariable String identifier){
+
+        if(typ.equals(Constants.MAIL)){
+            return userService.findByMail(identifier);
+        }
+        if(typ.equals(Constants.ID)){//NEVER USED
+            return userService.findOne(identifier);
+        }
+
+        return null;
+    }
+
+    @Override
+    @GetMapping(value="")
+    public List<User> getAll(){
+        List<MongoUser> userCollectionList = userService.findAll();
+        List<User> userList = new ArrayList<User>();
+        for(MongoUser userCollection : userCollectionList){
+            userList.add((User) userCollection);
+        }
+        return userList;
+    }
 }

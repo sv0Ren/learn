@@ -17,5 +17,4 @@ public class User {
     public String tel;
     public String userName;
     public String accountPrimary;
-
 }

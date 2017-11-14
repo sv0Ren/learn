@@ -13,11 +13,11 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.controller;
+package com.services;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.model.User;
-import com.services.UserService;
+import com.models.MongoUser;
+import com.repos.UserRepo;
 import constants.Constants;
 import org.junit.Assert;
 import org.junit.Before;
@@ -48,16 +48,16 @@ public class UserControllerTests {
     private MockMvc mockMvc;
 
     @Autowired
-    ObjectMapper objectMapper;
+    private ObjectMapper objectMapper;
 
     @Autowired
-    private UserService userService;
+    private UserRepo userService;
 
-    User user;
+    private MongoUser user;
 
     @Before
     public void setup() {
-        user = new User(ID,FIRSTNAME, LASTNAME);
+        user = new MongoUser(ID,FIRSTNAME, LASTNAME);
     }
 
     @Test
@@ -146,7 +146,7 @@ public class UserControllerTests {
                 .content(objectMapper.writeValueAsString(user)))
                 .andExpect(status().isOk());
 
-        User updatedUser = userService.findByFirstName("lala");
+        MongoUser updatedUser = userService.findByFirstName("lala");
         //User updatedUser2 = userService.findByMail(MAIL);
 
         Assert.assertEquals(updatedUser.firstName,"lala");

@@ -1,4 +1,4 @@
-package com.bean.util;
+package com.beans.utils;
 
 import org.springframework.boot.autoconfigure.security.oauth2.resource.ResourceServerProperties;
 import org.springframework.boot.context.properties.NestedConfigurationProperty;
