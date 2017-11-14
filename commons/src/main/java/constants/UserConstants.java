@@ -1,6 +1,6 @@
 package constants;
 
-public final class Constants {
+public final class UserConstants {
 
     public final static String MAIL = "mail";
     public final static String ID = "id";

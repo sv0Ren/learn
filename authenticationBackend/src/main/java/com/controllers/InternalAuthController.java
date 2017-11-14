@@ -1,8 +1,8 @@
-package com.services;
+package com.controllers;
 
 import com.models.AuthUser;
-import com.services.util.UserRestController;
-import constants.Constants;
+import com.services.UserService;
+import constants.UserConstants;
 import models.User;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.oauth2.provider.OAuth2Authentication;
@@ -16,7 +16,7 @@ import java.util.LinkedHashMap;
 
 @RestController
 @RequestMapping("/user")
-public class AuthController extends UserRestController {
+public class InternalAuthController extends UserService {
 
     @GetMapping()
     public Principal user(Principal principal) {
@@ -34,7 +34,7 @@ public class AuthController extends UserRestController {
         String accountId = (String) userDetails.get("id");
 
         if(userMail != null && userMail.contains("@")){
-            user = get(Constants.MAIL, userMail);
+            user = get(UserConstants.MAIL, userMail);
         }
 
         if(user == null){

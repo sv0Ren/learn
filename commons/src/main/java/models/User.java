@@ -8,13 +8,13 @@ import lombok.Setter;
 @Data
 public class User {
 
-    @Getter(AccessLevel.NONE)
-    @Setter(AccessLevel.NONE)
-    public String id;
-    public String firstName;
-    public String lastName;
-    public String mail;
-    public String tel;
-    public String userName;
-    public String accountPrimary;
+    //@Getter(AccessLevel.NONE)
+    //@Setter(AccessLevel.NONE)
+    protected String id;
+    protected String firstName;
+    protected String lastName;
+    protected String mail;
+    protected String tel;
+    protected String userName;
+    protected String accountPrimary;
 }

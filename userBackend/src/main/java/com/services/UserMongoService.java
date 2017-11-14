@@ -1,11 +1,11 @@
-package com.repos;
+package com.services;
 
 import java.util.List;
 
 import com.models.MongoUser;
 import org.springframework.data.mongodb.repository.MongoRepository;
 
-public interface UserRepo extends MongoRepository<MongoUser, String> {
+public interface UserMongoService extends MongoRepository<MongoUser, String> {
 
     public MongoUser findByMail(String mail);
 

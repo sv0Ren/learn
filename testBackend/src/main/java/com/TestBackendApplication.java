@@ -17,13 +17,11 @@ public class TestBackendApplication {
 
 	@RequestMapping("/")
 	public String home(Principal user) {
-		return "Hello " + user.getName();
+		return "Hello lala" + user.getName();
 	}
 
 
-
 	public static void main(String[] args) {
-		//new SpringApplicationBuilder(Main.class).properties("spring.config.name=client").run(args);
 		SpringApplication.run(TestBackendApplication.class, args);
 	}
 

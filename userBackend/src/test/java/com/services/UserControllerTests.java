@@ -17,8 +17,7 @@ package com.services;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.models.MongoUser;
-import com.repos.UserRepo;
-import constants.Constants;
+import constants.UserConstants;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
@@ -51,13 +50,13 @@ public class UserControllerTests {
     private ObjectMapper objectMapper;
 
     @Autowired
-    private UserRepo userService;
+    private UserMongoService userService;
 
     private MongoUser user;
 
     @Before
     public void setup() {
-        user = new MongoUser(ID,FIRSTNAME, LASTNAME);
+        user = new MongoUser(ID, FIRSTNAME, LASTNAME);
     }
 
     @Test
@@ -85,7 +84,7 @@ public class UserControllerTests {
         user.setMail(MAIL);
         userService.save(user);
 
-        this.mockMvc.perform(get("/user/"+Constants.MAIL+"/"+MAIL+"/"))
+        this.mockMvc.perform(get("/user/"+ UserConstants.MAIL+"/"+MAIL+"/"))
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("firstName").value(FIRSTNAME))
                 .andExpect(jsonPath("lastName").value(LASTNAME));
@@ -139,7 +138,7 @@ public class UserControllerTests {
     public void testUpdate() throws Exception {
         userService.save(user);
         //user.setMail(MAIL);
-        user.firstName = "lala";
+        user.setFirstName("lala");
 
         this.mockMvc.perform(put("/user")
                 .contentType(MediaType.APPLICATION_JSON)
@@ -149,7 +148,7 @@ public class UserControllerTests {
         MongoUser updatedUser = userService.findByFirstName("lala");
         //User updatedUser2 = userService.findByMail(MAIL);
 
-        Assert.assertEquals(updatedUser.firstName,"lala");
+        Assert.assertEquals(updatedUser.getFirstName(),"lala");
 
         userService.delete(updatedUser);
     }

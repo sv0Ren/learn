@@ -1,10 +1,10 @@
-package com.services;
+package com.controllers;
 
 
 import com.models.MongoUser;
-import com.repos.UserRepo;
-import constants.Constants;
-import interfaces.UserInterface;
+import com.services.UserMongoService;
+import constants.UserConstants;
+import interfaces.UserBackendInterface;
 import models.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -15,10 +15,10 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/user")
-public class UserService implements UserInterface {
+public class UserController implements UserBackendInterface {
 
     @Autowired
-    private UserRepo userService;
+    private UserMongoService userService;
 
     @Override
     @PostMapping()
@@ -43,9 +43,9 @@ public class UserService implements UserInterface {
     @Override
     @PutMapping
     public void update(@RequestBody User newUser){
-        MongoUser oldUser = userService.findOne(newUser.id);
+        MongoUser oldUser = userService.findOne(newUser.getId());
         if(oldUser != null){
-            newUser.id = oldUser.id;
+            newUser.setId(oldUser.getId());
             MongoUser mongoUser = new MongoUser(newUser);
             userService.save(mongoUser);
         }
@@ -55,10 +55,10 @@ public class UserService implements UserInterface {
     @GetMapping(value="/{typ}")
     public User get(@PathVariable String typ, @RequestBody String identifier){
 
-        if(typ.equals(Constants.MAIL)){
+        if(typ.equals(UserConstants.MAIL)){
             return userService.findByMail(identifier);
         }
-        if(typ.equals(Constants.ID)){
+        if(typ.equals(UserConstants.ID)){
             return userService.findOne(identifier);
         }
 
@@ -75,10 +75,10 @@ public class UserService implements UserInterface {
     @GetMapping(value={"/{typ}/{identifier}/"})
     public User getByIdentifier(@PathVariable String typ, @PathVariable String identifier){
 
-        if(typ.equals(Constants.MAIL)){
+        if(typ.equals(UserConstants.MAIL)){
             return userService.findByMail(identifier);
         }
-        if(typ.equals(Constants.ID)){//NEVER USED
+        if(typ.equals(UserConstants.ID)){//NEVER USED
             return userService.findOne(identifier);
         }
 

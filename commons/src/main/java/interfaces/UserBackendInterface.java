@@ -3,7 +3,7 @@ package interfaces;
 import models.User;
 import java.util.List;
 
-public interface UserInterface {
+public interface UserBackendInterface {
     /**
      * @PostMapping()
      * @RequestBody user

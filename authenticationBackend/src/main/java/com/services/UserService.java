@@ -1,27 +1,26 @@
-package com.services.util;
+package com.services;
 
-import com.models.AuthUser;
-import constants.Constants;
-import interfaces.UserInterface;
+import com.services.utils.RestService;
+import interfaces.UserBackendInterface;
 import models.User;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import java.util.List;
 
-public class UserRestController extends SimpleRestController implements UserInterface {
+public class UserService extends RestService implements UserBackendInterface {
 
     @Autowired
-    private String userBackend;
+    private String USER_BACKEND;
 
     @Override
     public User get(String typ, String identifier) {
-        String endpointUrl = userBackend + "user/{typ}/{identifier}/";
+        String endpointUrl = USER_BACKEND + "user/{typ}/{identifier}/";
         return get(endpointUrl, User.class, typ, identifier);
     }
 
     @Override
     public void create(User newUser) {
-        post(userBackend + "user", newUser, User.class);
+        post(USER_BACKEND + "user", newUser, User.class);
     }
 
     @Override

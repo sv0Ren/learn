@@ -1,14 +1,16 @@
 package com.models;
 
+import lombok.Data;
 import models.User;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
 @Document(collection="users")
+@Data
 public class MongoUser extends models.User{
 
     @Id
-    public String id;
+    protected String id;
 
     public MongoUser(){}
 
@@ -24,13 +26,22 @@ public class MongoUser extends models.User{
     }
 
     public MongoUser(User user) {
-        this.id = user.id;
-        this.firstName = user.firstName;
-        this.lastName = user.lastName;
-        this.mail = user.mail;
-        this.tel = user.tel;
-        this.userName = user.userName;
-        this.accountPrimary = user.accountPrimary;
+
+        this.id = user.getId();
+        this.firstName = user.getFirstName();
+        this.lastName = user.getLastName();
+        this.mail = user.getMail();
+        this.tel = user.getTel();
+        this.userName = user.getUserName();
+        this.accountPrimary = user.getAccountPrimary();
+
+//        this.id = user.id;
+//        this.firstName = user.firstName;
+//        this.lastName = user.lastName;
+//        this.mail = user.mail;
+//        this.tel = user.tel;
+//        this.userName = user.userName;
+//        this.accountPrimary = user.accountPrimary;
     }
 
 }
