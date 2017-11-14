@@ -18,6 +18,7 @@ package com.controller;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.model.User;
 import com.services.UserService;
+import constants.Constants;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
@@ -41,6 +42,7 @@ public class UserControllerTests {
     private static final String ID = "1337";
     private static final String FIRSTNAME = "FIRSTNAME";
     private static final String LASTNAME = "LASTNAME";
+    private static final String MAIL = "MAIL@alla.com";
 
     @Autowired
     private MockMvc mockMvc;
@@ -65,10 +67,37 @@ public class UserControllerTests {
     }
 
     @Test
-    public void testGet() throws Exception {
+    public void testGetWithBody() throws Exception {
         userService.save(user);
 
-        this.mockMvc.perform(get("/user/1337"))
+        this.mockMvc.perform(get("/user/id")
+                .contentType(MediaType.APPLICATION_JSON)
+                .content(ID))
+                .andExpect(status().isOk())
+                .andExpect(jsonPath("firstName").value(FIRSTNAME))
+                .andExpect(jsonPath("lastName").value(LASTNAME));
+
+        userService.delete(user);
+    }
+
+    @Test
+    public void testGetByTypAndIdentifier() throws Exception {
+        user.setMail(MAIL);
+        userService.save(user);
+
+        this.mockMvc.perform(get("/user/"+Constants.MAIL+"/"+MAIL+"/"))
+                .andExpect(status().isOk())
+                .andExpect(jsonPath("firstName").value(FIRSTNAME))
+                .andExpect(jsonPath("lastName").value(LASTNAME));
+
+        userService.delete(user);
+    }
+
+    @Test
+    public void testGetById() throws Exception {
+        userService.save(user);
+
+        this.mockMvc.perform(get("/user/id/"+ID))
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("firstName").value(FIRSTNAME))
                 .andExpect(jsonPath("lastName").value(LASTNAME));
@@ -109,7 +138,7 @@ public class UserControllerTests {
     @Test
     public void testUpdate() throws Exception {
         userService.save(user);
-
+        //user.setMail(MAIL);
         user.firstName = "lala";
 
         this.mockMvc.perform(put("/user")
@@ -118,6 +147,8 @@ public class UserControllerTests {
                 .andExpect(status().isOk());
 
         User updatedUser = userService.findByFirstName("lala");
+        //User updatedUser2 = userService.findByMail(MAIL);
+
         Assert.assertEquals(updatedUser.firstName,"lala");
 
         userService.delete(updatedUser);
@@ -125,7 +156,7 @@ public class UserControllerTests {
 
     @Test
     public void testDelteAllUsers() throws Exception {
-        //userService.deleteAll();
+        userService.deleteAll();
     }
 
 }

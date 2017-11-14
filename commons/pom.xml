@@ -9,8 +9,8 @@
     <version>0.1.0</version>
     <packaging>jar</packaging>
 
-    <name>commons</name>
 
+    <name>commons</name>
 
     <dependencies>
         <dependency>

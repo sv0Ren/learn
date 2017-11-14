@@ -18,10 +18,4 @@ public class User {
     public String userName;
     public String accountPrimary;
 
-    @Override
-    public String toString() {
-        return String.format(
-                "User[id=%s, firstName='%s', lastName='%s']", firstName, lastName);
-    }
-
 }
