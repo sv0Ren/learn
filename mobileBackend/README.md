@@ -7,7 +7,7 @@
 alpin ist ein sehr kleines linux  
 -d startet Container im Detached-Mode  
 -e setzt umgebungsvariablen  
--p leitet Porst weiter  
+-p leitet Port weiter  
 --restart legt die Restart-Policy fest  
 --name gibt dem Container einen Namen
 # Node.js
