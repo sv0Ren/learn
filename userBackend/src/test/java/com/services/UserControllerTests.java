@@ -66,38 +66,13 @@ public class UserControllerTests {
     }
 
     @Test
-    public void testGetWithBody() throws Exception {
-        userService.save(user);
-
-        this.mockMvc.perform(get("/user/id")
-                .contentType(MediaType.APPLICATION_JSON)
-                .content(ID))
-                .andExpect(status().isOk())
-                .andExpect(jsonPath("firstName").value(FIRSTNAME))
-                .andExpect(jsonPath("lastName").value(LASTNAME));
-
-        userService.delete(user);
-    }
-
-    @Test
-    public void testGetByTypAndIdentifier() throws Exception {
+    public void testGet() throws Exception {
         user.setMail(MAIL);
         userService.save(user);
 
-        this.mockMvc.perform(get("/user/"+ UserConstants.MAIL+"/"+MAIL+"/"))
+        this.mockMvc.perform(get("/user/"+MAIL+"/"))
                 .andExpect(status().isOk())
-                .andExpect(jsonPath("firstName").value(FIRSTNAME))
-                .andExpect(jsonPath("lastName").value(LASTNAME));
-
-        userService.delete(user);
-    }
-
-    @Test
-    public void testGetById() throws Exception {
-        userService.save(user);
-
-        this.mockMvc.perform(get("/user/id/"+ID))
-                .andExpect(status().isOk())
+                .andExpect(jsonPath("id").value(ID))
                 .andExpect(jsonPath("firstName").value(FIRSTNAME))
                 .andExpect(jsonPath("lastName").value(LASTNAME));
 
@@ -131,13 +106,11 @@ public class UserControllerTests {
                 .contentType(MediaType.APPLICATION_JSON)
                 .content(objectMapper.writeValueAsString(user)))
                 .andExpect(status().isOk());
-
     }
 
     @Test
     public void testUpdate() throws Exception {
         userService.save(user);
-        //user.setMail(MAIL);
         user.setFirstName("lala");
 
         this.mockMvc.perform(put("/user")
@@ -154,7 +127,7 @@ public class UserControllerTests {
     }
 
     @Test
-    public void testDelteAllUsers() throws Exception {
+    public void testDelteAll() throws Exception {
         userService.deleteAll();
     }
 
