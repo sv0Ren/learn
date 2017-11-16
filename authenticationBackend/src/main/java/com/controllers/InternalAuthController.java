@@ -2,8 +2,7 @@ package com.controllers;
 
 import com.models.AuthUser;
 import com.services.UserService;
-import constants.UserConstants;
-import models.User;
+import to.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.oauth2.provider.OAuth2Authentication;

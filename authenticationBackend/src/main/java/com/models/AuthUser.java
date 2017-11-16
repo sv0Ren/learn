@@ -1,6 +1,6 @@
 package com.models;
 
-public class AuthUser extends models.User{
+public class AuthUser extends to.User{
 
     public AuthUser(String userName, String mail, String accountPrimary) {
         this.mail = mail;

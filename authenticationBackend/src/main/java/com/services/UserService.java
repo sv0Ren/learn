@@ -1,7 +1,7 @@
 package com.services;
 
 import com.services.utils.RestService;
-import models.User;
+import to.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

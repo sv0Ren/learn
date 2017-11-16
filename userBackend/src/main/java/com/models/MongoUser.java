@@ -1,7 +1,7 @@
 package com.models;
 
 import lombok.Data;
-import models.User;
+import to.User;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 

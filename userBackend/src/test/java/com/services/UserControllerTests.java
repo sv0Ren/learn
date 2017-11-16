@@ -17,7 +17,6 @@ package com.services;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.models.MongoUser;
-import constants.UserConstants;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
@@ -50,7 +49,7 @@ public class UserControllerTests {
     private ObjectMapper objectMapper;
 
     @Autowired
-    private UserMongoService userService;
+    private MongoUserService userService;
 
     private MongoUser user;
 
@@ -80,7 +79,7 @@ public class UserControllerTests {
     }
 
     @Test
-    public void testCreate() throws Exception {
+    public void testPost() throws Exception {
         this.mockMvc.perform(post("/user")
                 .contentType(MediaType.APPLICATION_JSON)
                 .content(objectMapper.writeValueAsString(user)))
@@ -90,26 +89,16 @@ public class UserControllerTests {
     }
 
     @Test
-    public void testDeleteByID() throws Exception {
-        userService.save(user);
-
-        this.mockMvc.perform(delete("/user/"+ID))
-                .andExpect(status().isOk());
-
-    }
-
-    @Test
     public void testDelete() throws Exception {
         userService.save(user);
 
-        this.mockMvc.perform(delete("/user")
-                .contentType(MediaType.APPLICATION_JSON)
-                .content(objectMapper.writeValueAsString(user)))
+        this.mockMvc.perform(delete("/user/"+ID+"/"))
                 .andExpect(status().isOk());
+
     }
 
     @Test
-    public void testUpdate() throws Exception {
+    public void testPut() throws Exception {
         userService.save(user);
         user.setFirstName("lala");
 
@@ -118,7 +107,7 @@ public class UserControllerTests {
                 .content(objectMapper.writeValueAsString(user)))
                 .andExpect(status().isOk());
 
-        MongoUser updatedUser = userService.findByFirstName("lala");
+        MongoUser updatedUser = userService.findOne(ID);
         //User updatedUser2 = userService.findByMail(MAIL);
 
         Assert.assertEquals(updatedUser.getFirstName(),"lala");

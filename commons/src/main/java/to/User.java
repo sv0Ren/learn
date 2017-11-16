@@ -1,9 +1,6 @@
-package models;
+package to;
 
-import lombok.AccessLevel;
 import lombok.Data;
-import lombok.Getter;
-import lombok.Setter;
 
 @Data
 public class User {

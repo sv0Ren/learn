@@ -2,9 +2,9 @@ package com.controllers;
 
 
 import com.models.MongoUser;
-import com.services.UserMongoService;
-import constants.UserConstants;
-import models.User;
+import com.services.MongoUserService;
+import interfaces.UserRestService;
+import to.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -14,63 +14,64 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/user")
-public class UserController{
+public class UserController implements UserRestService {
 
     @Autowired
-    private UserMongoService userService;
+    private MongoUserService mongoUserService;
 
+    @Override
     @PostMapping()
-    public void create(@RequestBody User user) {
+    public void post(@RequestBody User user) {
         MongoUser mongoUser = new MongoUser(user);
-        userService.save(mongoUser);
+        mongoUserService.save(mongoUser);
     }
 
-    @DeleteMapping()
-    public void delete(@RequestBody User user) {
-        MongoUser mongoUser = new MongoUser(user);
-        userService.delete(mongoUser);
-    }
-
-    @DeleteMapping(value="/{userId}")
-    public void delete(@PathVariable String userId){
-        userService.delete(userId);
-    }
-
-    @PutMapping
-    public void update(@RequestBody User newUser){
-        MongoUser oldUser = userService.findOne(newUser.getId());
-        if(oldUser != null){
-            newUser.setId(oldUser.getId());
-            MongoUser mongoUser = new MongoUser(newUser);
-            userService.save(mongoUser);
+    @Override
+    @DeleteMapping(value="/{identifier}/")
+    public void delete(@PathVariable String identifier){
+        if(identifier.contains("@")){
+            mongoUserService.deleteByMail(identifier);
         }
+        mongoUserService.delete(identifier);
     }
 
+    @Override
+    @PutMapping
+    public void put(@RequestBody User newUser){
+        MongoUser oldUser = mongoUserService.findOne(newUser.getId());
+        MongoUser mongoUser = new MongoUser(newUser);
+        if(oldUser != null){
+            mongoUser.setId(oldUser.getId());
+        }
+        mongoUserService.save(mongoUser);
+    }
 
+    @Override
     @GetMapping(value={"/{identifier}/"})
     public User get(@PathVariable String identifier){
 
         User user = null;
 
         if(identifier.contains("@")){
-           user = userService.findByMail(identifier);
+           user = mongoUserService.findByMail(identifier);
         }
         if(user == null){
-            user = userService.findByUserName(identifier);
+            user = mongoUserService.findByUserName(identifier);
         }
         if(user == null){
-            user = userService.findByAccountPrimary(identifier);
+            user = mongoUserService.findByAccountPrimary(identifier);
         }
         if(user == null){
-            user = userService.findOne(identifier);
+            user = mongoUserService.findOne(identifier);
         }
 
         return user;
     }
 
+    @Override
     @GetMapping(value="")
-    public List<User> getAll(){
-        List<MongoUser> userCollectionList = userService.findAll();
+    public List<User> get(){
+        List<MongoUser> userCollectionList = mongoUserService.findAll();
         List<User> userList = new ArrayList<User>();
         for(MongoUser userCollection : userCollectionList){
             userList.add((User) userCollection);
