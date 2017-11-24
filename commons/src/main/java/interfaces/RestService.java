@@ -32,7 +32,7 @@ public interface RestService <T> {
      * @PathVariable identifier
      * @return
      */
-    T get(String identifier);
+     T get(String identifier);
 
     /**
      * Get all Objects

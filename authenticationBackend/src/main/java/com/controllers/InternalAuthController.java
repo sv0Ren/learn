@@ -1,14 +1,14 @@
 package com.controllers;
 
 import com.models.AuthUser;
-import com.services.UserService;
-import to.User;
-import org.springframework.beans.factory.annotation.Autowired;
+import com.framwork.rest.services.GenericRestService;
+import com.framwork.rest.annotationBeans.InjectRestService;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.oauth2.provider.OAuth2Authentication;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+import to.User;
 
 import java.security.Principal;
 import java.util.LinkedHashMap;
@@ -18,8 +18,8 @@ import java.util.LinkedHashMap;
 @RequestMapping("/user")
 public class InternalAuthController {
 
-    @Autowired
-    UserService userService;
+    @InjectRestService(to = User.class)
+    private GenericRestService<User> userService;
 
     @GetMapping()
     public Principal user(Principal principal) {

@@ -1,6 +1,4 @@
-package com.services;
-
-import java.util.List;
+package com.framwork.rest.services;
 
 import com.models.MongoUser;
 import org.springframework.data.mongodb.repository.MongoRepository;

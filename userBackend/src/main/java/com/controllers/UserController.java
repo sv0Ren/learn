@@ -2,8 +2,7 @@ package com.controllers;
 
 
 import com.models.MongoUser;
-import com.services.MongoUserService;
-import interfaces.UserRestService;
+import com.framwork.rest.services.MongoUserService;
 import to.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;

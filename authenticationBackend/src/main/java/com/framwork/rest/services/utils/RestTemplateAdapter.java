@@ -1,4 +1,4 @@
-package com.services.utils;
+package com.framwork.rest.services.utils;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -6,7 +6,7 @@ import org.springframework.web.client.RestTemplate;
 
 import java.util.Map;
 
-public class RestService {
+public class RestTemplateAdapter {
 
     @Autowired
     private RestTemplate restTemplate;
